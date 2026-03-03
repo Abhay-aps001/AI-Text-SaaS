@@ -1,0 +1,24 @@
+AI Text Improver SaaS
+-Built a full-stack AI-powered SaaS application that improves and rewrites user text with corrected grammar, spelling, and tone adjustments.
+
+Project Overview
+-Developed a web-based AI Text Improver that allows users to input raw text and receive a professionally rewritten version using a large language model. The system integrates frontend UI, backend API routes, and external AI services to deliver real-time text enhancement.
+
+Tech Stack
+
+Frontend: Next.js (App Router), React, TypeScript
+Backend: Next.js API Routes
+AI Integration: Groq API (LLaMA 3.3 70B model)
+Styling: Tailwind CSS
+Environment Management: .env configuration
+Version Control: Git
+
+Key Features
+Real-time AI-powered grammar and spelling correction
+Tone-based rewriting (professional, casual, etc.)
+Backend API integration with external LLM
+Proper error handling and async request management
+Environment variable security for API keys
+Architecture Flow
+
+User Input → Frontend → API Route → Groq LLM → Processed Output → UI Display

@@ -9,16 +9,43 @@ export default function Demo() {
     const [output, setOutput] = useState("")
     const [loading, setLoading] = useState(false)
 
-    const handleImprove = () => {
-        if (!input) return
+    // const handleImprove = () => {
+    //     if (!input) return
 
-        setLoading(true)
+    //     setLoading(true)
 
-        setTimeout(() => {
-            setOutput(`Improved (${tone}) version:\n\n${input}`)
-            setLoading(false)
-        }, 1500)
+    //     setTimeout(() => {
+    //         setOutput(`Improved (${tone}) version:\n\n${input}`)
+    //         setLoading(false)
+    //     }, 1500)
+    // }
+const handleImprove = async () => {
+    if (!input) return
+
+    setLoading(true)
+
+    try {
+        const response = await fetch("/api/improve", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                text: input,
+                tone: tone,
+            }),
+        })
+
+        const data = await response.json()
+        setOutput(data.result)
+    } catch (error) {
+        console.error("Error:", error)
+        setOutput("Something went wrong.")
     }
+
+    setLoading(false)
+}
+
     return (
         <section className="py-32 px-6 bg-black text-white">
             <div className="max-w-6xl mx-auto">
