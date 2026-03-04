@@ -14,8 +14,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Text Improver",
-  description: "Improve your writing with AI",
+  title: "AI Text Improver — Fix Grammar & Rewrite with AI",
+  description: "Instantly improve your writing with AI. Fix grammar, spelling, and rewrite in professional, friendly, or simple tone using LLaMA 3.3.",
+  keywords: ["AI writing", "grammar checker", "text improver", "AI rewriter", "tone adjustment"],
+  authors: [{ name: "Abhay Pratap Singh", url: "https://www.linkedin.com/in/abhayypratap24/" }],
+  openGraph: {
+    title: "AI Text Improver — Fix Grammar & Rewrite with AI",
+    description: "Transform your text into professional, friendly, or simple tone instantly.",
+    url: "https://your-deployed-url.vercel.app",
+    siteName: "AI Text Improver",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Text Improver",
+    description: "Improve your writing instantly with AI.",
+  },
 };
 
 export default function RootLayout({

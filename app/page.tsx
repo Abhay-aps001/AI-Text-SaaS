@@ -2,6 +2,7 @@ import Navbar from "./components/sections/navbar"
 import Hero from "./components/sections/hero"
 import Features from "./components/sections/features"
 import Demo from "./components/sections/demo"
+import Footer from "./components/sections/footer"
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <Features />
       <Demo />
+      <Footer />
     </main>
   )
 }
