@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { useUser, SignInButton } from "@clerk/nextjs"
 
@@ -13,14 +13,23 @@ export default function Demo() {
     const [output, setOutput] = useState("")
     const [loading, setLoading] = useState(false)
     const [showPopup, setShowPopup] = useState(false)
+    const [mounted, setMounted] = useState(false)
 
-    const getTrialCount = () => parseInt(localStorage.getItem("freeTrials") || "0")
-    const incrementTrial = () => localStorage.setItem("freeTrials", String(getTrialCount() + 1))
+    useEffect(() => setMounted(true), [])
+
+    const getTrialCount = () => {
+        if (typeof window === "undefined") return 0
+        return parseInt(localStorage.getItem("freeTrials") || "0")
+    }
+
+    const incrementTrial = () => {
+        if (typeof window === "undefined") return
+        localStorage.setItem("freeTrials", String(getTrialCount() + 1))
+    }
 
     const handleImprove = async () => {
         if (!input) return
 
-        // Check trial limit for non-signed-in users
         if (!isSignedIn) {
             const trials = getTrialCount()
             if (trials >= FREE_TRIAL_LIMIT) {
@@ -41,7 +50,6 @@ export default function Demo() {
             const data = await response.json()
             setOutput(data.result)
 
-            // Only increment if not signed in
             if (!isSignedIn) incrementTrial()
 
         } catch (error) {
@@ -94,8 +102,8 @@ export default function Demo() {
                             {loading ? "Improving..." : "Improve Text"}
                         </button>
 
-                        {/* Trial counter for guests */}
-                        {!isSignedIn && (
+                        {/* Trial counter - only renders after mount to avoid hydration error */}
+                        {!isSignedIn && mounted && (
                             <p className="mt-3 text-sm text-gray-400 text-center">
                                 {Math.max(0, FREE_TRIAL_LIMIT - getTrialCount())} free trial(s) remaining
                             </p>
